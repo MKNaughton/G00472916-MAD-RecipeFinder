@@ -12,12 +12,30 @@
   <ion-item>
     <!--Ion-input: input can be regular HTML but ionic offers a nicer way of doing it  - class materials 
     Ref:https://ionicframework.com/docs/components -->
-    <ion-input label="Enter Ingredients"></ion-input> 
+    <ion-input label="Enter Ingredients"[(ngModel)]="ingredients"></ion-input> 
   </ion-item>
 <!--Again rather then using a plain Html button- the Ionic compenent:ion-button renders a better looking button
  Ref:https://ionicframework.com/docs/components-->
-  <ion-button (click)="searchRecipes()">SEARCH</ion-button>
+  <ion-button (click)="searchRecipes()">SEARCH</ion-button><!--Search button triggers the API call-->
 
+<!--*ngFor creates one card for each recipe in the recipes array-->
+  <ion-card *ngFor="let recipe of recipes">
+
+<!--Recipe image display-->
+<!--REF:Class materials lab10-->
+  <!--[] bind this to Typescript variable, reciepe.image gets the image URL from each recipe object-->
+<ion-img [src]="recipe.image"></ion-img>
+
+  <ion-card-header>
+<!--Display recipe title-->
+<!--Double curly brackets display Typescript variable values in HTML-->
+<ion-card-title>{{recipe.title}}</ion-card-title>
+  </ion-card-header>
+  <!--Adds detail button to each recipe-->
+  <ion-card-content>
+    <ion-button>Details</ion-button>
+  </ion-card-content>
+  </ion-card>
 
 </ion-content>
 
