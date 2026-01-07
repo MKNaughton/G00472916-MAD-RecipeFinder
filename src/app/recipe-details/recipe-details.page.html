@@ -6,8 +6,8 @@
 
 <ion-content [fullscreen]="true">
 
-  <!--check if data exists before displaying, REF:class materials-->
-  <div *ngIf="recipeDetails">
+  <!--check if data exists before displaying, REF:class materials wk 9-->
+  <div *ngIf="recipeDetails && instructions"> <!--Fix applied to include data AND instructions exist before displaying page , prevents errors when page loads before API returns data, REF: wk 9 class materials-->
 
 <!--display the recipe image like in home page recipe cards-->
 <ion-img [src]="recipeDetails.image"></ion-img>
