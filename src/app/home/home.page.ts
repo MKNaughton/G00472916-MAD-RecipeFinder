@@ -17,6 +17,8 @@ import {FormsModule} from '@angular/forms';
 //*ngFor is angular built in directive , not Ionic-specific 
 //REF:Class materials wk 11
 import {CommonModule} from '@angular/common';
+//REF: wk 9, https://angular.dev/api/router/RouterLink
+import {RouterLink} from '@angular/router';
 
 
 
@@ -38,7 +40,7 @@ interface Recipe {
   styleUrls: ['home.page.scss'],
   //Imports array for all modules and components  used in this components template.
   //REF class materials + Angular standalone components, https://angular.dev/guide/components/importing
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, FormsModule, CommonModule  ],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, RouterLink, FormsModule, CommonModule  ],
 })
 export class HomePage {
   //stores ingredient input from ion input field
