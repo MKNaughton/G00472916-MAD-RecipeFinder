@@ -5,9 +5,48 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recipe-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <!--check if data exists before displaying, REF:class materials-->
+  <div *ngIf="recipeDetails">
+
+<!--display the recipe image like in home page recipe cards-->
+<ion-img [src]="recipeDetails.image"></ion-img>
+
+<ion-card>
+
+<ion-card-header>
+
+<!--Display recipe title-->
+
+<ion-card-title>{{recipeDetails.title}}</ion-card-title>
+</ion-card-header>
+
+<ion-card-content>
+<h3>Ingredients:</h3>
+  
+<ion-list>
+<!--*ngFor to iterate through ingredients array and display eachone-->
+<ion-item *ngFor="let ingredient of recipeDetails.extendedIngredients">
+<ion-label>{{ingredient.original}}</ion-label>
+
+</ion-item>
+</ion-list>
+<!--Instructions section after ingredients-->
+<h2>Instructions</h2>
+<ion-list>
+  <!--*ngFor to loop through steps array , REF:wk 11 class materials-->
+  <ion-item *ngFor="let i of instructions">
+<ion-label >
+  <!--display step numbers and display instruction text from array objects-->
+  {{i.number}}. {{i.step}}
+
+</ion-label>
+
+  </ion-item>
+</ion-list>
+</ion-card-content>
+
+</ion-card>
+
+  </div>
 </ion-content>

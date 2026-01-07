@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonImg } from '@ionic/angular/standalone';
 // ActivatedRoute gets parameter from URL - REF:class materials w9
 import {ActivatedRoute} from '@angular/router';
 // reuse HTTP service for API calls
@@ -14,7 +14,7 @@ import {HttpOptions} from '@capacitor/core';
   templateUrl: './recipe-details.page.html',
   styleUrls: ['./recipe-details.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonImg, CommonModule, FormsModule]
 })
 export class RecipeDetailsPage implements OnInit {
 
@@ -26,6 +26,9 @@ recipeDetails: any = null;
 
 //spoonacular API key
 apiKey: string = '70759a4f7911402abcc53d3c51d3b759';
+
+//same as hobbies array wk 11
+instructions: any[] = [];
 
 //Inject ActivatedRoute to access URL parameters+RecipeApiService for Http calls
   constructor(private route:ActivatedRoute, private recipeApi:RecipeApiService) { }
@@ -54,7 +57,12 @@ async ionViewWillEnter(){
 
     //store the response data - image, ingredients and recipe instructions
     this.recipeDetails = response.data;
-    
+
+    //analyzedInstructions array, 1st element contains the steps array
+    if (response.data.analyzedInstructions && response.data.analyzedInstructions.length > 0){ // check if API returned instructions and array isnt empty
+     //// accesing nested array: [0] gets the first instruction set , .steps gets array of step objects.
+      this.instructions = response.data.analyzedInstructions[0].steps;
+    }
     // log to console for testing 
     console.log('Recipe Details:', this.recipeDetails);
   }
