@@ -1,13 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-titles size="large">Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+ <!--Set card for measure unit selection metric or US measurement-->
+<ion-card->
+<ion-card-header>
+  <ion-card-title>Measurement Units</ion-card-title>
+</ion-card-header>
+
+<ion-card-content>
+  <!--Radio group allows single selection - only one option can be selected at a time, metric or US not both-->
+  <!--REF: Ionic docs https://ionicframework.com/docs/api/radio-group -->
+<!--[(ngModel)] two way binding, REF:wk 9-->
+<!--(ionChange) fires saveUnit method when user selects different option-->
+<!--REF:Ionic docs https://ionicframework.com/docs/api/radio-group -->
+<ion-radio-group [(ngModel)]="selectedUnit" (ionChange)="saveUnit()">
+
+<!--metric option-->
+<ion-item>
+  <ion-label>Metric (grams, ml)</ion-label>
+  <ion-radio slot="end" value="metric"></ion-radio>
+  </ion-item>
+
+<!--US option-->
+<ion-item>
+  <ion-label>US (cups, tablespoons)</ion-label>
+  <ion-radio slot="end" value="us"></ion-radio>
+</ion-item>
+
+</ion-radio-group>
+</ion-card-content>
+</ion-card>
 </ion-content>
