@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonImg } from '@ionic/angular/standalone';
 // ActivatedRoute gets parameter from URL - REF:class materials w9
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 // reuse HTTP service for API calls
-import{RecipeApiService} from '../services/recipe-api';
+import{ RecipeApiService } from '../services/recipe-api';
 //HttpOptions structures API request with  URL
-import {HttpOptions} from '@capacitor/core';
+import { HttpOptions } from '@capacitor/core';
+//Storage service to read users measurement preference - REF:wk 10
+import{ StorageService } from '../services/storage-service';
+
 
 @Component({
   selector: 'app-recipe-details',
@@ -30,8 +33,12 @@ apiKey: string = '70759a4f7911402abcc53d3c51d3b759';
 //same as hobbies array wk 11
 instructions: any[] = [];
 
+// store users measurement options loaded from storage
+selectedUnit:string = 'metric';
+
 //Inject ActivatedRoute to access URL parameters+RecipeApiService for Http calls
-  constructor(private route:ActivatedRoute, private recipeApi:RecipeApiService) { }
+//Inject storage service to read metric/US options
+  constructor(private route:ActivatedRoute, private recipeApi:RecipeApiService, private storageService: StorageService) { }
 
   ngOnInit() {
   }
@@ -40,6 +47,10 @@ instructions: any[] = [];
 // Use instead of ngOnInit for Ionic pages that need fresh data every visit
 async ionViewWillEnter(){
 
+  const savedUnit = await this.storageService.get('measurementUnit');
+  if(savedUnit) {
+    this.selectedUnit = savedUnit
+  }
   //REf:Class materials wk 9 
   //Extract the recipe Id from URL route parameter
   //this.route.snapshot.paraMap.get to retrieve parameter
@@ -57,6 +68,13 @@ async ionViewWillEnter(){
 
     //store the response data - image, ingredients and recipe instructions
     this.recipeDetails = response.data;
+
+    //Use for loop to find the attributes that the API returns - REF: wk 11 data in object
+   for(const key in this.recipeDetails.extendedIngredients[0].measures){
+    // prints out the object keys API returns: object keys are case sensitive so recipe-details.html must match same as API returned objects
+    // if Recipe-details.page.html uses uppercase but the API returned object keys are lower case , no data is displayed 
+    console.log('Measure key found:', key); 
+   }
 
     //analyzedInstructions array, 1st element contains the steps array
     if (response.data.analyzedInstructions && response.data.analyzedInstructions.length > 0){ // check if API returned instructions and array isnt empty

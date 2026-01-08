@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
 
   <!--check if data exists before displaying, REF:class materials wk 9-->
-  <div *ngIf="recipeDetails && instructions"> <!--Fix applied to include data AND instructions exist before displaying page , prevents errors when page loads before API returns data, REF: wk 9 class materials-->
+  <div *ngIf="recipeDetails && instructions.length"> <!--Fix applied to include data AND instructions exist before displaying page , prevents errors when page loads before API returns data, REF: wk 9 class materials-->
 
 <!--display the recipe image like in home page recipe cards-->
 <ion-img [src]="recipeDetails.image"></ion-img>
@@ -27,8 +27,15 @@
 <ion-list>
 <!--*ngFor to iterate through ingredients array and display eachone-->
 <ion-item *ngFor="let ingredient of recipeDetails.extendedIngredients">
-<ion-label>{{ingredient.original}}</ion-label>
+<!--<ion-label>{{ingredient.original}}</ion-label>-->
 
+<!--Conditional display using {{variable}} interpolation wk 9-->
+<ion-label *ngIf = "selectedUnit === 'metric'">
+{{ingredient.measures.metric.amount}}  {{ingredient.measures.metric.unitLong}} {{ingredient.name}}
+</ion-label>
+<ion-label *ngIf = "selectedUnit === 'us'">
+ {{ingredient.measures.us.amount}}  {{ingredient.measures.us.unitLong}} {{ingredient.name}} 
+</ion-label>
 </ion-item>
 </ion-list>
 <!--Instructions section after ingredients-->

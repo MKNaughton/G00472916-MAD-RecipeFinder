@@ -5,21 +5,21 @@ import { FormsModule } from '@angular/forms';
 //REF: Ionic docs, https://ionicframework.com/docs/api/card and /radio
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonRadioGroup, IonRadio, IonItem, IonLabel} from '@ionic/angular/standalone';
 //storage  service for saving user preferances -REF:wk 10
-Import {StorageServiceService} from '../services/storage-service.service';
+import {StorageService} from '../services/storage-service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardContent, IonRadioGroup, IonRadio, IonItem, IonLabel, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader,IonCardTitle, IonCardContent, IonRadioGroup, IonRadio, IonItem, IonLabel, CommonModule, FormsModule]
 })
 export class SettingsPage implements OnInit {
 // store the measurement selected - default metric
 
 selectedUnit: string = 'metric';
 //storage services injected in constructorto save and load metric
-  constructor(private storageService: StorageServiceService) { }
+  constructor(private storageService: StorageService) { }
 
   ngOnInit() {
   }
