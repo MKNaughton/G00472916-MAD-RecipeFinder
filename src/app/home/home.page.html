@@ -2,7 +2,23 @@
   <ion-toolbar>
     <ion-title>
       G00472916
-    </ion-title>
+  </ion-title>
+      <!--navigation icons-->
+      <!--setting icon- navigation to the settings page -->
+      <!-- Places icons REF: https://ionicframework.com/docs/api/buttons-->
+       <ion-buttons slot="end">
+      <!--REF:Class materials wk 9 routerlink for navigation-->
+      <ion-button routerLink="/settings">
+      <!--REF:https://ionic.io/ionicons-->
+      <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+   
+      <!--Favourites icon - to navigate to the favourites page-->
+      <ion-button routerLink="/favourites">
+      <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+      </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -44,21 +60,4 @@
 
 
 
-<!--
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-<ion-content>[fullscreen]="true">
-   <h4 [routerLink]="['/Ingredients']">Ingredients</h4>
-</ion-content>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-  -->
- 
 

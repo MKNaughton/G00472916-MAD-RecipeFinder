@@ -1,24 +1,30 @@
-// Every <ion-something> used in the HTML must be imported in the .ts file. NB FIX
+// Every <ion-something> used in the HTML must be imported in the .ts file. 
 //Ref: https://ionicframework.com/docs/components
 import { Component } from '@angular/core';
 //Ionic components imported and added to the imports array- class materials
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, IonButtons, IonIcon, } from '@ionic/angular/standalone';
+//import addIcons to register icons- class materials
+import { addIcons } from 'ionicons';
+//Iport specific icons needed 
+import { settingsOutline, heartOutline } from 'ionicons/icons';
+
 // service created in reciepe -api.ts to handle  HTTP requests
-import {RecipeApiService} from '../services/recipe-api';
+import { RecipeApiService } from '../services/recipe-api';
 //HttpOptions Type from Capacitor - structures API with Url properties
 //REF:capacitorjs.com/docs/apis/http#httpoptions
-import{HttpOptions} from '@capacitor/core';
+import{ HttpOptions } from '@capacitor/core';
 
 //form module to allow for twoway binding with [(ngModel)] input field-Syncs inputfield value with Typescript variable
 //REF:Angular forms guide-https://angular.dev/guide/forms/template-driven-forms
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 //commonModule provides angular directives = *ngFor for template iteration 
 //Angular CommonModule docs https://angular.dev/api/common/CommonModule
 //*ngFor is angular built in directive , not Ionic-specific 
 //REF:Class materials wk 11
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 //REF: wk 9, https://angular.dev/api/router/RouterLink
-import {RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
+//IonButtons and IonIcon for header navigation
 
 
 
@@ -40,7 +46,7 @@ interface Recipe {
   styleUrls: ['home.page.scss'],
   //Imports array for all modules and components  used in this components template.
   //REF class materials + Angular standalone components, https://angular.dev/guide/components/importing
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, RouterLink, FormsModule, CommonModule  ],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonImg, RouterLink, IonButtons, IonIcon, FormsModule, CommonModule  ],
 })
 export class HomePage {
   //stores ingredient input from ion input field
@@ -54,7 +60,10 @@ export class HomePage {
 recipes: Recipe[] = [];
 
 //constructor uses dependancy injection to get RecipeApiService instance 
-  constructor(private recipeApi: RecipeApiService) {}
+//register icons with addIcons or they wont display- REF:Class material s wk 9,https://ionic.io/ionicons 
+  constructor(private recipeApi: RecipeApiService) {
+    addIcons({ settingsOutline, heartOutline});
+  }
 
   //method called when user clicks search button in home.page.html
   //async waits for API response
