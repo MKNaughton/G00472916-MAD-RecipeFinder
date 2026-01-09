@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Favourite Recipes </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--Check if favourites array has reciepies- REF:WK 9 *ngIF-->
+  <div *ngIf="favourites.length > 0">
+
+    <!--Loop through the favourites array and display each recipe as a card-->
+    <!--REF: wk 11 = *ngFor iterates through the array-->
+<ion-card *ngFor="let recipe of favourites">
+  <ion-card-header>
+    <!--displays recipe title- Interpolation{{}}-->
+    <ion-card-title>{{ recipe.title}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+<!--display recipe image - REF:wk 9 property binding-->
+<ion-img [src]="recipe.image"></ion-img>
+
+<!--details button to navigate to recipe-details page, same as home page - REF:wk9 routerLink for navigation-->
+<ion-button [routerLink]="['/recipe-details', recipe.id]">Details</ion-button>
+  </ion-card-content>
+
+</ion-card>
+</div>
+
+<!--show message if there are no favourites saved - REF: wk 9 *ngIf-->
+<div *ngIf="favourites.length === 0">
+  <p> No favourite recipes saved yet.Add some from the recipe details page!</p>
+</div>
+
+</ion-content>

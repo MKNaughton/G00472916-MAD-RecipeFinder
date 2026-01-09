@@ -56,4 +56,11 @@
 </ion-card>
 
   </div>
+<!--Add to favourites button - toggle between add to favorites /remove from favourites -->
+<ion-button (click)="addRemoveFavourite()">
+  <!--display remove from favourites if already a favourite, if not button says add to favourites-->
+  <!--conditional display using {{}} interpolation wk 9 , -->
+  {{ isFavourite ? 'Remove from Favourites': 'Add to Favourites' }}
+</ion-button>
+
 </ion-content>
